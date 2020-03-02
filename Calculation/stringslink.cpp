@@ -1,6 +1,6 @@
 #include"stringslink.h"
 
-link* _getword(link* l,specialsymbol* o)
+link* getoneword(link* l,specialsymbol* o)
 {
 	if (l->ptr == NULL)
 	{
@@ -29,6 +29,25 @@ link* _getword(link* l,specialsymbol* o)
 		}
 	}
 	return words;
+}
+
+link* createspecialword(specialsymbol o)
+{
+	link* l = initlink();
+	switch (o)
+	{
+	case plus:appendlink(l, '+'); break;
+	case sub: appendlink(l, '-'); break;
+	case times:appendlink(l, '*'); break;
+	case divide:appendlink(l, '/'); break;
+	case semicolon:appendlink(l, ';'); break;
+	case equals:appendlink(l, '='); break;
+	case left:appendlink(l, '('); break;
+	case right:appendlink(l, ')'); break;
+	default:
+		break;
+	}
+	return l;
 }
 
 
@@ -92,10 +111,35 @@ words* deletewords(words* w)
 	return NULL;
 }
 
-words* buildwords(link*)
+words* buildwords(link* l)
 {
-
-	return nullptr;
+	specialsymbol o;
+	words* w = initwords();
+	while (l->ptr != NULL)
+	{
+		o = null;
+		link* word = getoneword(l, &o);
+		if (word->head != NULL)
+		{
+			if (o == null)
+			{
+				appendwords(w, word);
+			}
+			else
+			{
+				appendwords(w, word);
+				appendwords(w, createspecialword(o));
+			}
+		}
+		else
+		{
+			if (o != null)
+			{
+				appendwords(w, createspecialword(o));
+			}
+		}
+	}
+	return w;
 }
 
 sentences* initsentences()
@@ -122,7 +166,7 @@ int appendsentences(sentences* s, words* w, int line)
 	}
 	else
 	{
-		sentencenode* current = (sentencenode*)malloc(sizeof(sentencenode);
+		sentencenode* current = (sentencenode*)malloc(sizeof(sentencenode));
 		current->next = NULL;
 		current->line = line;
 		current->w = w;
@@ -159,8 +203,9 @@ sentences* deletesentences(sentences* s)
 	return NULL;
 }
 
-sentences* buildsentences(words*)
+sentences* buildsentences(words* w)
 {
+
 	return nullptr;
 }
 

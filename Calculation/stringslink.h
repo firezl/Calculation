@@ -36,7 +36,8 @@ typedef struct _sentences
 	int length;
 }sentences;
 
-link* _getword(link*, specialsymbol*);
+link* getoneword(link*, specialsymbol*);
+link* createspecialword(specialsymbol);
 
 words* initwords();
 int appendwords(words*, link*);

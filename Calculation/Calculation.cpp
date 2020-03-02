@@ -35,16 +35,8 @@ int main(int argc, char** argv)
         {
             appendlink(l, ch);
         }
-        link* w = initlink();
-        specialsymbol o = null;
-        while ((w = getword(l, &o))!=NULL)
-        {
-            for (int i = 0; i < w->length; i++)
-            {
-                printf("%c", getlinkchar(w));
-            }
-            printf("\n");
-        }
+        words* w = buildwords(l);
+        printwords(w);
     }
 
     return 0;
