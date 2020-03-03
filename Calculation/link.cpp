@@ -28,6 +28,7 @@ int appendlink(link* l, char ch)
         current->ch = ch;
         l->tail->next = current;
         l->tail = current;
+        l->ptr = l->head;
         l->length += 1;
     }
 

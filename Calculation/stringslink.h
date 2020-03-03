@@ -4,7 +4,6 @@
 
 #include "link.h"
 #include "symbols.h"
-#include <string.h>
 #include <stdio.h>
 
 typedef struct _wordnode
@@ -54,5 +53,7 @@ sentences* buildsentences(words*);
 int printlink(link*);
 int printwords(words*);
 int printsentences(sentences*);
+
+int strlinkcmp(link*, link*);
 
 #endif

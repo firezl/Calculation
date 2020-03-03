@@ -205,8 +205,27 @@ sentences* deletesentences(sentences* s)
 
 sentences* buildsentences(words* w)
 {
+	link* word = NULL;
+	sentences* s = initsentences();
+	link* semi = initlink();
+	appendlink(semi, ';');
+	int line = 0;
+	words* sent = initwords();
+	while ((word = getword(w)) != NULL)
+	{
+		if (strlinkcmp(word, semi))
+		{
+			line++;
+			appendsentences(s, sent, line);
+			sent = initwords();
+		}
+		else
+		{
+			appendwords(sent, word);
+		}
 
-	return nullptr;
+	}
+	return s;
 }
 
 int printlink(link* l)
@@ -239,5 +258,25 @@ int printsentences(sentences* s)
 	}
 	printf("\n");
 	s->ptr = s->head;
+	return 0;
+}
+
+int strlinkcmp(link* l1, link* l2)
+{
+	if (l1->length == l2->length)
+	{
+		while (l1->ptr != NULL && l2->ptr != NULL)
+		{
+			if (getlinkchar(l1) != getlinkchar(l2))
+			{
+				l1->ptr = l1->head;
+				l2->ptr = l2->head;
+				return 0;
+			}
+		}
+		l1->ptr = l1->head;
+		l2->ptr = l2->head;
+		return 1;
+	}
 	return 0;
 }

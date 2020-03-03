@@ -36,7 +36,8 @@ int main(int argc, char** argv)
             appendlink(l, ch);
         }
         words* w = buildwords(l);
-        printwords(w);
+        sentences* s = buildsentences(w);
+        printsentences(s);
     }
 
     return 0;

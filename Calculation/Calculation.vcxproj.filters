@@ -24,6 +24,12 @@
     <ClCompile Include="stringslink.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="test.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="analysis.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="link.h">
@@ -33,6 +39,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="stringslink.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="analysis.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
