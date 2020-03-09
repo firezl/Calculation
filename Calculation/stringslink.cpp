@@ -1,5 +1,5 @@
 #include"stringslink.h"
-
+#include<stdio.h>
 link* getoneword(link* l,specialsymbol* o)
 {
 	if (l->ptr == NULL)

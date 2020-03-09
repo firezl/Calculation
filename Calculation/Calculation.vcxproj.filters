@@ -30,6 +30,9 @@
     <ClCompile Include="analysis.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="symbols.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="link.h">

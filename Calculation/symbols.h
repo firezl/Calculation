@@ -7,34 +7,63 @@
 
 typedef enum
 {
-    keywords,
-    number,
-    operate,
-    function
+    integer,
+    floatnumber,
 } symboltype;
+
 
 typedef enum
 {
-    plus,
-    sub,
-    times,
-    divide,
-    semicolon,
-    equals,
-    left,
-    right,
-    null
-}specialsymbol;
+    _plus,
+    _sub,
+    _times,
+    _divide,
+    _equals,
+    _left,
+    _right,
+    _integer,
+    _floatnum,
+    _write,
+    _other
+
+}operatortype;
 
 typedef struct _symbol
 {
-    char* name;
+    link* name;
     symboltype type;
-    double value;
-    char* parameters;
+    double floatvalue;
+    int intvalue;
+    struct _symbol* next;
 
 } symbol;
 
-int analysesymbol();
+typedef struct _symboltable
+{
+    symbol* head;
+    symbol* ptr;
+    symbol* tail;
+    int length;
+}symboltable;
 
+typedef struct _operators
+{
+    operatortype o;
+    struct _operators* next;
+}operators;
+
+symboltable* initsymboltable();
+int appendsymboltable(symboltable*, link*, symboltype, double, int);
+symboltable* deletesymbletable(symboltable*);
+symbol* getsymbol(symboltable*);
+symbol* inquiresymbol(symboltable*, link*);
+int isnumber(link*);
+int stoint(link*);
+double stofloat(link*);
+
+operators* pushoperator(operators*, operatortype);
+operators* popoperator(operators*, operatortype*);
+
+symbol* pushsymbol(symbol*, link*);
+symbol* popsymbol(symbol*, link**);
 #endif

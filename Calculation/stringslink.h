@@ -3,8 +3,19 @@
 #define STRINGLINK
 
 #include "link.h"
-#include "symbols.h"
-#include <stdio.h>
+
+typedef enum
+{
+	plus,
+	sub,
+	times,
+	divide,
+	semicolon,
+	equals,
+	left,
+	right,
+	null
+}specialsymbol;
 
 typedef struct _wordnode
 {
