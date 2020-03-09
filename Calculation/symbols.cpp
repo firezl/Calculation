@@ -44,6 +44,27 @@ int appendsymboltable(symboltable* t, link* l, symboltype s, double v1, int v2)
 	return 0;
 }
 
+int modifysymboltable(symboltable* t, link* l , symboltype p, double d, int i)
+{
+	symbol* s = NULL;
+	t->ptr = t->head;
+	while ((s = getsymbol(t)) != NULL)
+	{
+		if (strlinkcmp(s->name, l))
+		{
+			break;
+		}
+	}
+	if (s == NULL)
+	{
+		return 1;
+	}
+	s->floatvalue = d;
+	s->intvalue = i;
+	s->type = p;
+	return 0;
+}
+
 symboltable* deletesymbletable(symboltable* t)
 {
 	t->ptr = NULL;
@@ -72,6 +93,8 @@ symbol* getsymbol(symboltable* t)
 symbol* inquiresymbol(symboltable* t, link* l) //需要进一步完善
 {
 	symbol* s = NULL;
+	l->ptr = l->head;
+	t->ptr = t->head;
 	while ((s = getsymbol(t)) != NULL)
 	{
 		if (strlinkcmp(s->name, l))
@@ -79,6 +102,7 @@ symbol* inquiresymbol(symboltable* t, link* l) //需要进一步完善
 			return s;
 		}
 	}
+	t->ptr = t->head;
 	int flag = 0;
 	flag = isnumber(l);
 	switch (flag)
@@ -90,7 +114,9 @@ symbol* inquiresymbol(symboltable* t, link* l) //需要进一步完善
 	case 1:
 	{
 		s = (symbol*)malloc(sizeof(symbol));
+		s->name = NULL;
 		s->intvalue = stoint(l);
+		s->floatvalue = 0;
 		s->type = integer;
 		s->next = NULL;
 		return s;
@@ -98,7 +124,9 @@ symbol* inquiresymbol(symboltable* t, link* l) //需要进一步完善
 	case 2:
 	{
 		s = (symbol*)malloc(sizeof(symbol));
-		s->intvalue = stofloat(l);
+		s->name = NULL;
+		s->floatvalue = stofloat(l);
+		s->intvalue = 0;
 		s->type = floatnumber;
 		s->next = NULL;
 		return s;
@@ -116,11 +144,21 @@ int isnumber(link* l)
 {
 	int dot = 0;
 	char ch = '\0';
+	int sub = 0;
+	if ((ch = getlinkchar(l)) == '-')
+	{
+		sub = 1;
+	}
+	else
+	{
+		l->ptr = l->head;
+	}
 	while ((ch = getlinkchar(l)) != 0)
 	{
 		if (ch == '.')
 		{
 			dot++;
+			continue;
 		}
 		if (dot >= 2)
 		{
@@ -141,11 +179,21 @@ int stoint(link* l)
 {
 	int sum = 0;
 	char ch = '\0';
+	int sub = 0;
+	if ((ch = getlinkchar(l)) == '-')
+	{
+		sub = 1;
+	}
+	else
+	{
+		l->ptr = l->head;
+	}
 	while ((ch = getlinkchar(l)) != 0)
 	{
 		sum = (ch - '0') + sum * 10;
 	}
 	l->ptr = l->head;
+	sum = sub == 0 ? sum : -sum;
 	return sum;
 }
 
@@ -155,6 +203,15 @@ double stofloat(link* l)
 	int e = 0;
 	char ch = '\0';
 	double sum = 0.0;
+	int sub = 0;
+	if ((ch = getlinkchar(l)) == '-')
+	{
+		sub = 1;
+	}
+	else
+	{
+		l->ptr = l->head;
+	}
 	while ((ch = getlinkchar(l)) != 0)
 	{
 		index++;
@@ -169,6 +226,7 @@ double stofloat(link* l)
 	{
 		sum /= 10;
 	}
+	sum = sub == 0 ? sum : -sum;
 	return sum;
 }
 

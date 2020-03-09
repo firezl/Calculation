@@ -2,30 +2,57 @@
 #include<stdio.h>
 #include"link.h"
 #include "stringslink.h"
+#include"analysis.h"
 
 int main(int argc, char** argv)
 {
-    FILE* fp;
+    FILE* fpin;
+    FILE* fpout = stdout;
     if (argc > 1)
     {
-        fp = fopen(argv[1], "r");
-        link* l = initlink();
-        if (fp != NULL)
+        if (argc == 2)
         {
-            while (!feof(fp))
+            fpin = fopen(argv[1], "r");
+            link* l = initlink();
+            if (fpin != NULL)
             {
-                char ch = fgetc(fp);
-                if ((int)ch < 0)
-                    continue;
-                appendlink(l, ch);
+                while (!feof(fpin))
+                {
+                    char ch = fgetc(fpin);
+                    if ((int)ch < 0)
+                        continue;
+                    appendlink(l, ch);
+                }
             }
         }
-
-        for (int i = l->length; i > 0; i--)
+        else
         {
-            printf("%c", getlinkchar(l));
+            fpin = fopen(argv[1], "r");
+            fpout = fopen(argv[2], "w");
+            link* l = initlink();
+            if (fpin != NULL)
+            {
+                while (!feof(fpin))
+                {
+                    char ch = fgetc(fpin);
+                    if ((int)ch < 0)
+                        continue;
+                    appendlink(l, ch);
+                }
+            }
+            words* w = buildwords(l);
+            sentences* s = buildsentences(w);
+            words* constkey = initial();
+            symboltable* t = initsymboltable();
+            if (analysesentence(s, constkey, t, fpout))
+                printf("error!\n");
+            deletelink(l);
+            deletewords(w);
+            deletewords(constkey);
+            deletesentences(s);
+            deletesymbletable(t);
         }
-        printf("\n");
+
     }
     else
     {
@@ -37,7 +64,15 @@ int main(int argc, char** argv)
         }
         words* w = buildwords(l);
         sentences* s = buildsentences(w);
-        printsentences(s);
+        words* constkey = initial();
+        symboltable* t = initsymboltable();
+        if (analysesentence(s, constkey, t, fpout))
+            printf("error!\n");
+        deletelink(l);
+        deletewords(w);
+        deletewords(constkey);
+        deletesentences(s);
+        deletesymbletable(t);
     }
 
     return 0;

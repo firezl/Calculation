@@ -14,7 +14,19 @@ typedef enum
 
 typedef enum
 {
+    _left,
+    _times,
+    _divide,
     _plus,
+    _sub,
+    _integer,
+    _floatnum,
+    _equals,
+    _write,
+    _right,
+    _other
+    
+    /*_plus,
     _sub,
     _times,
     _divide,
@@ -24,7 +36,7 @@ typedef enum
     _integer,
     _floatnum,
     _write,
-    _other
+    _other*/
 
 }operatortype;
 
@@ -54,6 +66,7 @@ typedef struct _operators
 
 symboltable* initsymboltable();
 int appendsymboltable(symboltable*, link*, symboltype, double, int);
+int modifysymboltable(symboltable*, link*, symboltype, double, int);
 symboltable* deletesymbletable(symboltable*);
 symbol* getsymbol(symboltable*);
 symbol* inquiresymbol(symboltable*, link*);
@@ -66,4 +79,6 @@ operators* popoperator(operators*, operatortype*);
 
 symbol* pushsymbol(symbol*, link*);
 symbol* popsymbol(symbol*, link**);
+
+
 #endif

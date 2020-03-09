@@ -1,5 +1,6 @@
 #include"stringslink.h"
 #include<stdio.h>
+
 link* getoneword(link* l,specialsymbol* o)
 {
 	if (l->ptr == NULL)
@@ -263,6 +264,10 @@ int printsentences(sentences* s)
 
 int strlinkcmp(link* l1, link* l2)
 {
+	if (l1 == l2)
+	{
+		return 1;
+	}
 	if (l1->length == l2->length)
 	{
 		while (l1->ptr != NULL && l2->ptr != NULL)
