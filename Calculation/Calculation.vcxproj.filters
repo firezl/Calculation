@@ -24,9 +24,6 @@
     <ClCompile Include="stringslink.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="analysis.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -47,5 +44,8 @@
     <ClInclude Include="analysis.h">
       <Filter>头文件</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
 </Project>

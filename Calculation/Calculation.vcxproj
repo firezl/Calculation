@@ -152,13 +152,15 @@
     <ClCompile Include="link.cpp" />
     <ClCompile Include="stringslink.cpp" />
     <ClCompile Include="symbols.cpp" />
-    <ClCompile Include="test.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="analysis.h" />
     <ClInclude Include="link.h" />
     <ClInclude Include="stringslink.h" />
     <ClInclude Include="symbols.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

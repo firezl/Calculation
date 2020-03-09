@@ -246,7 +246,7 @@ int printwords(words* w)
 	{
 		printlink(getword(w));
 	}
-	printf("\n");
+	printf(" ");
 	w->ptr = w->head;
 	return 0;
 }
